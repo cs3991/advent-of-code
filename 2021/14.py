@@ -12,6 +12,8 @@ for e in inp:
     assoc[e[0]] = e[1]
 
 polymer = polymer.center(len(polymer) + 2, '#')
+
+
 pol_pairs = []
 for i in range(len(polymer) - 1):
     pol_pairs.append(polymer[i] + polymer[i + 1])
