@@ -25,6 +25,7 @@ if int(file_created) in day_files:
 
 with open(str(file_created) + '.py', 'w', encoding='utf-8') as py_file:
     py_file.write(f'''from tictoc import tic, toc
+from cprint import cprint
 from collections import defaultdict, Counter
 
 tic()
