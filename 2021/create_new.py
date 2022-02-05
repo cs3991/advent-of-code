@@ -30,6 +30,9 @@ from collections import defaultdict, Counter
 
 tic()
 
+with open("ex{file_created}.txt") as file:
+    ex = [line for line in file]
+
 with open("input{file_created}.txt") as file:
     inp = [line for line in file]
 # print(inp)
@@ -45,7 +48,7 @@ print('   PART 2')
 
 toc('Partie 2 terminée en')''')
 
-system(fr'D:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-P\ch-0\213.5744.248\bin\pycharm64.exe --line 6 {file_created}.py')
+system(fr'C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-P\ch-0\213.5744.248\bin\pycharm64.exe --line 6 {file_created}.py')
 
 COOKIE = os.getenv('COOKIE')
 URL = f'https://adventofcode.com/2021/day/{file_created}/input'
@@ -57,9 +60,9 @@ data = urllib.request.urlopen(req).read()
 with open(f'input{file_created}.txt', 'wb') as input_file:
     input_file.write(data)
 
-system(fr'D:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-P\ch-0\213.5744.248\bin\pycharm64.exe --line 6 input{file_created}.txt')
+system(fr'C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-P\ch-0\213.5744.248\bin\pycharm64.exe --line 6 input{file_created}.txt')
 
 with open(f'ex{file_created}.txt', 'w', encoding='utf-8') as ex_file:
     ex_file.write('\n')
 
-system(fr'D:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-P\ch-0\213.5744.248\bin\pycharm64.exe --line 6 ex{file_created}.txt')
+system(fr'C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-P\ch-0\213.5744.248\bin\pycharm64.exe --line 6 ex{file_created}.txt')
