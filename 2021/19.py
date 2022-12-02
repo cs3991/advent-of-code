@@ -1,11 +1,7 @@
 from typing import Tuple, List, Set
 
 from tictoc import tic, toc
-# from cprint import cprint
-# from collections import defaultdict, Counter
 import re
-
-# import matplotlib.pyplot as plt
 
 tic()
 
@@ -47,54 +43,6 @@ def rotations(coords):
 
 
 r = rotations((1, 2, 3))
-
-# 3d plot of rotations :
-
-# fig = plt.figure()
-# ax = fig.add_subplot(projection='3d')
-# for e in r:
-#     ax.quiver(0, 0, 0, e[0], e[1], e[2])
-# plt.xlim(-5, 5)
-# plt.ylim(-5, 5)
-# ax.set_zlim(-5, 5)
-# plt.show()
-
-# test rotations :
-
-exact = {(1, 2, 3),
-         (1, 3, -2),
-         (1, -2, -3),
-         (1, -3, 2),
-         (-1, -2, 3),
-         (-1, 3, 2),
-         (-1, 2, -3),
-         (-1, -3, -2),
-         (2, -1, 3),
-         (2, 3, 1),
-         (2, 1, -3),
-         (2, -3, -1),
-         (-2, 1, 3),
-         (-2, 3, -1),
-         (-2, -1, -3),
-         (-2, -3, 1),
-         (3, 2, -1),
-         (3, -1, -2),
-         (3, -2, 1),
-         (3, 1, 2),
-         (-3, 2, 1),
-         (-3, 1, -2),
-         (-3, -2, -1),
-         (-3, -1, 2),
-         }
-# for e in r:
-#     if e in exact:
-#         cprint(e, 'green')
-#     else:
-#         cprint(e, 'bright')
-# for e in exact:
-#     if e not in r:
-#         cprint(e, 'red')
-assert exact == set(r)
 
 
 def rotate_set(iterable, nrot):
@@ -201,7 +149,7 @@ def solve_part_1(inp):
     return len(all_beacons)
 
 
-# print(solve_part_1(ex))
+print(solve_part_1(inp))
 
 toc('Partie 1 terminée en')
 # -------- Part 2 -----------
@@ -221,14 +169,14 @@ def find_max_dist(beacons_set):
             if distance > max_dist:
                 max_dist = distance
                 max_coords = [all_beacons_list[i], all_beacons_list[j]]
-    print(max_coords)
+    # print(max_coords)
     return max_dist
 
 
 def solve_part_2(inp):
     asso = recursive_overlapping(0, inp)
     all_beacons, scanners = get_all_beacons(asso, inp)
-    print(scanners)
+    # print(scanners)
     return find_max_dist(scanners)
 
 
