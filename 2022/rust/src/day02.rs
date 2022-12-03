@@ -56,17 +56,12 @@ fn main() -> Result<(), Box<dyn Error>> {
     fn generate_symbols(duel: Split<&str>) -> [u64; 2] {
         let duel: [&str; 2] = duel.collect::<Vec<&str>>().try_into().unwrap();
         let opponent_shape = letter_to_points(duel[0]);
-        if duel[1] == "X" {
-            // lose
-            [opponent_shape, (opponent_shape + 1).rem_euclid(3) + 1]
-        } else if duel[1] == "Y" {
-            // draw
-            [opponent_shape, opponent_shape]
-        } else if duel[1] == "Z" {
-            // win
-            [opponent_shape, opponent_shape.rem_euclid(3) + 1]
-        } else {
-            panic!()
+
+        match duel[1] {
+            "X" => [opponent_shape, (opponent_shape + 1).rem_euclid(3) + 1], // lose
+            "Y" => [opponent_shape, opponent_shape],                         // draw
+            "Z" => [opponent_shape, opponent_shape.rem_euclid(3) + 1],       // win
+            _ => panic!(),
         }
     }
     let list_symbols = input_list.map(generate_symbols);
