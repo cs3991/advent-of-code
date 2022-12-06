@@ -52,7 +52,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     // -------- Part 2 ---------
     let start = Instant::now();
     // let input_str = fs::read_to_string("src/input/ex03")?;
-    let input_str = fs::read_to_string("src/input/input03")?;
+    let input_str =
+        fs::read_to_string("src/input/input03")?;
     let input_str = input_str.trim();
     let size = input_str.lines().count();
     assert_eq!(size % 3, 0);
@@ -83,3 +84,4 @@ fn main() -> Result<(), Box<dyn Error>> {
     );
     Ok(())
 }
+

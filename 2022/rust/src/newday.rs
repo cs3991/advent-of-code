@@ -114,7 +114,7 @@ fn main() {
     std::process::Command::new("C:/Users/simar/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/222.3739.54/bin/clion64.exe")
         .arg(format!("src/input/ex{:02}", day))
         .spawn()
-        .expect("Unable to open input file in Clion");
+        .expect("Unable to open ex file in Clion");
 
     std::process::Command::new("C:/Users/simar/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/222.3739.54/bin/clion64.exe")
         .arg(format!("src/input/input{:02}", day))
