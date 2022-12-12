@@ -2,12 +2,12 @@ use std::fs;
 use std::time::Instant;
 
 fn main() {
-    println!("Advent of Code 2022 - Jour XX");
+    println!("Advent of Code 2022 - Jour 11");
 
     // -------- Part 1 ---------
     let start = Instant::now();
-    let input_str = fs::read_to_string("src/input/exXX").unwrap();
-    // let input_str = fs::read_to_string("src/input/inputXX").unwrap();
+    let input_str = fs::read_to_string("src/input/ex11").unwrap();
+    // let input_str = fs::read_to_string("src/input/input11").unwrap();
     let input_str = input_str.trim();
 
     // println!("Part 1 : {part1}");
@@ -20,8 +20,8 @@ fn main() {
 
     // -------- Part 2 ---------
     let start = Instant::now();
-    let input_str = fs::read_to_string("src/input/exXX").unwrap();
-    // let input_str = fs::read_to_string("src/input/inputXX").unwrap();
+    let input_str = fs::read_to_string("src/input/ex11").unwrap();
+    // let input_str = fs::read_to_string("src/input/input11").unwrap();
     let input_str = input_str.trim();
 
     // println!("Part 2 : {part2}");

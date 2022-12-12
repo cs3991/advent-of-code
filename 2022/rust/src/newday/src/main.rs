@@ -5,8 +5,11 @@ use std::fs::File;
 use std::io;
 use std::io::{Read, Write};
 use std::path::Path;
+use std::thread::sleep;
+use std::time::Duration;
 
 fn main() {
+    dotenv::dotenv().expect("Unable to load .env file");
     let day: u64;
     loop {
         let mut day_str = String::new();
@@ -40,36 +43,29 @@ fn main() {
         println!("The file {} already exists", path);
         return;
     }
-    let mut file =
-        File::create(path).expect("Unable to create file");
+    let mut file = File::create(path).expect("Unable to create file");
     // get the content of the template file, replace the day number and write it to the new file
-    let template = include_str!("template.rs");
-    let content = template
-        .replace("XX", format!("{:02}", day).as_str());
-    file.write_all(content.as_bytes()).expect(
-        "Unable to write template code to new file",
-    );
+    let template = include_str!("../../template.rs");
+    let content = template.replace("XX", format!("{:02}", day).as_str());
+    file.write_all(content.as_bytes())
+        .expect("Unable to write template code to new file");
 
     // download the input file from https://adventofcode.com/2022/day/{day}/input
-    dotenv::from_filename("src/.env")
-        .expect("Unable to load .env file");
     let aoc_session = env::var("AOC_SESSION")
         .expect("AOC_SESSION environment variable not set");
     let user_agent = env::var("USER_AGENT")
         .expect("USER_AGENT environment variable not set");
     let client = Client::new();
     let input = client
-        .get(format!("https://adventofcode.com/2022/day/{}/input", day).as_str())
+        .get(
+            format!("https://adventofcode.com/2022/day/{}/input", day).as_str(),
+        )
         .header("Cookie", "session=".to_owned() + &aoc_session)
         .header("User-Agent", user_agent);
-    let input = input
-        .send()
-        .expect("Unable to download input file");
-    let input =
-        input.text().expect("Unable to read input file");
-    let mut file =
-        File::create(format!("src/input/input{:02}", day))
-            .expect("Unable to create input file");
+    let input = input.send().expect("Unable to download input file");
+    let input = input.text().expect("Unable to read input file");
+    let mut file = File::create(format!("src/input/input{:02}", day))
+        .expect("Unable to create input file");
     file.write_all(input.as_bytes())
         .expect("Unable to write input file");
 
@@ -78,8 +74,8 @@ fn main() {
         .expect("Unable to create example input file");
 
     // update the Cargo.toml file
-    let mut cargo_toml = File::open("Cargo.toml")
-        .expect("Unable to open Cargo.toml file");
+    let mut cargo_toml =
+        File::open("Cargo.toml").expect("Unable to open Cargo.toml file");
     let mut cargo_toml_content = String::new();
     cargo_toml
         .read_to_string(&mut cargo_toml_content)
@@ -89,23 +85,20 @@ fn main() {
         day, day
     )
         .as_str();
-    let mut cargo_toml = File::create("Cargo.toml")
-        .expect("Unable to open Cargo.toml file");
+    let mut cargo_toml =
+        File::create("Cargo.toml").expect("Unable to open Cargo.toml file");
     cargo_toml
         .write_all(cargo_toml_content.as_bytes())
         .expect("Unable to write to Cargo.toml file");
 
     // create the run configuration for Clion from day01.xml
-    let mut run_config = File::create(format!(
-        ".idea/runConfigurations/Day{:02}.xml",
-        day
-    ))
-        .expect("Unable to create run configuration file");
-    let run_config_template = include_str!(
-        "../.idea/runConfigurations/day01.xml"
-    );
-    let run_config_content = run_config_template
-        .replace("01", format!("{:02}", day).as_str());
+    let mut run_config =
+        File::create(format!(".idea/runConfigurations/Day{:02}.xml", day))
+            .expect("Unable to create run configuration file");
+    let run_config_template =
+        include_str!("../../../.idea/runConfigurations/day01.xml");
+    let run_config_content =
+        run_config_template.replace("01", format!("{:02}", day).as_str());
     run_config
         .write_all(run_config_content.as_bytes())
         .expect("Unable to write run configuration file");
@@ -115,16 +108,19 @@ fn main() {
         .arg(format!("src/input/ex{:02}", day))
         .spawn()
         .expect("Unable to open ex file in Clion");
+    sleep(Duration::from_millis(100));
 
     std::process::Command::new("C:/Users/simar/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/222.3739.54/bin/clion64.exe")
         .arg(format!("src/input/input{:02}", day))
         .spawn()
         .expect("Unable to open input file in Clion");
+    sleep(Duration::from_millis(100));
 
     std::process::Command::new("C:/Users/simar/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/222.3739.54/bin/clion64.exe")
         .arg(format!("src/day{:02}.rs", day))
         .spawn()
         .expect("Unable to open rust file in Clion");
+    sleep(Duration::from_millis(100));
 
     // add the new files to git
     std::process::Command::new("git")
