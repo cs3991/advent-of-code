@@ -8,9 +8,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-files = [f for f in listdir('.') if isfile(join('.', f))]
+current_year = datetime.datetime.now().year
+os.chdir(f'./{current_year}')
+
+files = [f for f in listdir(f'.') if isfile(join('.', f))]
 python_files = [f.replace('.py', '') for f in files if '.py' in f]
 day_files = [int(f) for f in python_files if re.search('[0-9]', f) is not None]
+if len(day_files) == 0:
+    day_files = [0]
 current_file = max(day_files)
 current_day = datetime.datetime.now().day
 
@@ -22,6 +27,7 @@ else:
 if int(file_created) in day_files:
     raise FileExistsError(f'Le fichier {file_created}.py existe déjà')
 
+print(file_created)
 
 with open(str(file_created) + '.py', 'w', encoding='utf-8') as py_file:
     py_file.write(f'''from tictoc import tic, toc
@@ -48,10 +54,10 @@ print('   PART 2')
 
 toc('Partie 2 terminée en')''')
 
-system(fr'C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-P\ch-0\213.5744.248\bin\pycharm64.exe --line 6 {file_created}.py')
+system(fr'"C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-C\ch-0\231.9011.38\bin\pycharm64.exe" --line 6 {file_created}.py')
 
 COOKIE = os.getenv('COOKIE')
-URL = f'https://adventofcode.com/2021/day/{file_created}/input'
+URL = f'https://adventofcode.com/{current_year}/day/{file_created}/input'
 req = urllib.request.Request(URL)
 req.add_header('Cookie', 'session=' + COOKIE)
 data = urllib.request.urlopen(req).read()
@@ -60,9 +66,9 @@ data = urllib.request.urlopen(req).read()
 with open(f'input{file_created}.txt', 'wb') as input_file:
     input_file.write(data)
 
-system(fr'C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-P\ch-0\213.5744.248\bin\pycharm64.exe --line 6 input{file_created}.txt')
+system(fr'"C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-C\ch-0\231.9011.38\bin\pycharm64.exe" --line 6 input{file_created}.txt')
 
 with open(f'ex{file_created}.txt', 'w', encoding='utf-8') as ex_file:
     ex_file.write('\n')
 
-system(fr'C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-P\ch-0\213.5744.248\bin\pycharm64.exe --line 6 ex{file_created}.txt')
+system(fr'"C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-C\ch-0\231.9011.38\bin\pycharm64.exe" --line 6 ex{file_created}.txt')
