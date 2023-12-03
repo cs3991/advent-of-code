@@ -1,9 +1,9 @@
 import datetime
 import os
 import re
+import urllib.request
 from os import listdir, system
 from os.path import isfile, join
-import urllib.request
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,10 +19,12 @@ if len(day_files) == 0:
 current_file = max(day_files)
 current_day = datetime.datetime.now().day
 
-if current_day != current_file + 1 :
-    file_created = input('Numéro du jour ?')
+if current_day != current_file + 1:
+    day_to_generate = int(input('Numéro du jour ?'))
 else:
-    file_created = current_day
+    day_to_generate = current_day
+
+file_created = f'{day_to_generate:02d}'
 
 if int(file_created) in day_files:
     raise FileExistsError(f'Le fichier {file_created}.py existe déjà')
@@ -34,7 +36,6 @@ with open(str(file_created) + '.py', 'w', encoding='utf-8') as py_file:
 from cprint import cprint
 from collections import defaultdict, Counter
 
-tic()
 
 with open("ex{file_created}.txt") as file:
     ex = [line for line in file]
@@ -43,18 +44,20 @@ with open("input{file_created}.txt") as file:
     inp = [line for line in file]
 # print(inp)
 
+tic()
 # -------- Part 1 -----------
 print('   PART 1')
 
 
-toc('Partie 1 terminée en')
+toc('Part 1 done in')
 # -------- Part 2 -----------
 print('   PART 2')
 
 
-toc('Partie 2 terminée en')''')
+toc('Part 2 done in')''')
 
-system(fr'"C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-C\ch-0\231.9011.38\bin\pycharm64.exe" --line 6 {file_created}.py')
+system(
+    fr'"C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-C\ch-0\232.10227.11\bin\pycharm64.exe" --line 16 {file_created}.py')
 
 COOKIE = os.getenv('COOKIE')
 URL = f'https://adventofcode.com/{current_year}/day/{file_created}/input'
@@ -62,13 +65,14 @@ req = urllib.request.Request(URL)
 req.add_header('Cookie', 'session=' + COOKIE)
 data = urllib.request.urlopen(req).read()
 
-
 with open(f'input{file_created}.txt', 'wb') as input_file:
     input_file.write(data)
 
-system(fr'"C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-C\ch-0\231.9011.38\bin\pycharm64.exe" --line 6 input{file_created}.txt')
+system(
+    fr'"C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-C\ch-0\232.10227.11\bin\pycharm64.exe" input{file_created}.txt')
 
 with open(f'ex{file_created}.txt', 'w', encoding='utf-8') as ex_file:
     ex_file.write('\n')
 
-system(fr'"C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-C\ch-0\231.9011.38\bin\pycharm64.exe" --line 6 ex{file_created}.txt')
+system(
+    fr'"C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-C\ch-0\232.10227.11\bin\pycharm64.exe" ex{file_created}.txt')
