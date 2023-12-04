@@ -4,6 +4,7 @@ import re
 import urllib.request
 from os import listdir, system
 from os.path import isfile, join
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -60,7 +61,7 @@ system(
     fr'"C:\Users\simar\AppData\Local\JetBrains\Toolbox\apps\PyCharm-C\ch-0\232.10227.11\bin\pycharm64.exe" --line 16 {file_created}.py')
 
 COOKIE = os.getenv('COOKIE')
-URL = f'https://adventofcode.com/{current_year}/day/{file_created}/input'
+URL = f'https://adventofcode.com/{current_year}/day/{str(int(file_created))}/input'
 req = urllib.request.Request(URL)
 req.add_header('Cookie', 'session=' + COOKIE)
 data = urllib.request.urlopen(req).read()
