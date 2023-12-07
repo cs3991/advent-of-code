@@ -6,10 +6,10 @@ from typing import Generator
 def create_tic_toc_generator() -> Generator[float, None, None]:
     # Generator that returns time differences
     # ti = 0  # initial time
-    tf = time.time()  # final time
+    tf = time.perf_counter()  # final time
     while True:
         ti = tf
-        tf = time.time()
+        tf = time.perf_counter()
         yield tf - ti  # returns the time difference
 
 

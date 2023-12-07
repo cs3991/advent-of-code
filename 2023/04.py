@@ -10,9 +10,9 @@ with open("input04.txt") as file:
 # inp = ex
 # print(inp)
 
-tic()
 # -------- Part 1 -----------
 print('   PART 1')
+tic()
 score = 0
 for line in inp:
     matches = re.match(pattern=r'Card *[0-9]*: (.*) \| (.*)', string=line)
@@ -24,10 +24,11 @@ for line in inp:
             n_winning += 1
     if n_winning > 0:
         score += 2 ** (n_winning - 1)
-print(score)
 toc('Part 1 done in')
+print(score)
 # -------- Part 2 -----------
 print('   PART 2')
+tic()
 n_cards = 0
 cards = []
 cards_copies = dict()
@@ -48,6 +49,6 @@ for id_card, winning, numbers in cards:
         cards_copies[i] += cards_copies[id_card]
     n_cards += cards_copies[id_card]
 
+toc('Part 2 done in')
 print(n_cards)
 
-toc('Part 2 done in')
