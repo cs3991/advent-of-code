@@ -33,6 +33,7 @@ def toc(message: str = '', print_value: bool = True) -> None:
         else:
             unit = 's'
         print(f"[toc] {message} {temp_time_interval:.2f} {unit}")
+        tic()
 
 def tic() -> None:
     # Records a time in TicToc, marks the beginning of a time interval
