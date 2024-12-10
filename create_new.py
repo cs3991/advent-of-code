@@ -37,13 +37,14 @@ with open(str(file_created) + '.py', 'w', encoding='utf-8') as py_file:
 from cprint import cprint
 from collections import defaultdict, Counter
 
+def parse(file):
+    return [line for line in file]
 
 with open("ex{file_created}.txt") as file:
-    ex = [line for line in file]
+    ex = parse(file)
 
 with open("input{file_created}.txt") as file:
-    inp = [line for line in file]
-# print(inp)
+    inp = parse(file)
 
 tic()
 # -------- Part 1 -----------
